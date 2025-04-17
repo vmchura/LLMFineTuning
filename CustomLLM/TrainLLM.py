@@ -51,7 +51,7 @@ class TrainLLM(object):
         )
 
         # Load model and tokenizer
-        tokenizer = AutoTokenizer.from_pretrained(self.parameters['MODEL_NAME'])
+        tokenizer = AutoTokenizer.from_pretrained(self.model_name)
         model = AutoModelForCausalLM.from_pretrained(
             self.model_name,
             quantization_config=bnb_config,
