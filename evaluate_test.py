@@ -38,7 +38,8 @@ def load_questions(file_path="question_answer.csv", use_subset=USE_SUBSET, subse
 def get_model_response(model, tokenizer, question):
     """Get model's response to a given question"""
     # Using TinyLlama format
-    prompt = f"<|user|>\n{question}\n<|assistant|>\n"
+    prompt = f"<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\n{question}<|im_end|>\n<|im_start|>assistant\n"
+
     inputs = tokenizer(prompt, return_tensors="pt").to(DEVICE)
     
     # Generate response - using smaller max_new_tokens for speed
