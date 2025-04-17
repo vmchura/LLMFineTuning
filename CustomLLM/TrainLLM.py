@@ -33,7 +33,7 @@ class TrainLLM(object):
         return f"<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\n{row['Question']}<|im_end|>\n<|im_start|>assistant\n{row['Answer']}<|im_end|>\n",
 
     def load_data(self):
-        df = pd.read_csv('question_answers.csv', header=1)
+        df = pd.read_csv('question_answer.csv', header=1)
         if self.parameters['USE_SUBSET']:
             df = df.head(self.parameters['SUBSET_SIZE'])
         df['text'] = df.apply(self.process_row_question_answer, axis=1)

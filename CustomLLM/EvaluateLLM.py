@@ -18,7 +18,7 @@ class EvaluateLLM:
     def proces_question(self, question):
         return f"<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\n{question}<|im_end|>\n<|im_start|>assistant\n"
     def load_questions(self):
-        return pd.read_csv('question_answers.csv', header=1)
+        return pd.read_csv('question_answer.csv', header=1)
 
     def get_model_response(self, model, tokenizer, question):
         prompt = self.proces_question(question)
