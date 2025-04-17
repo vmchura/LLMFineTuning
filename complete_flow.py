@@ -14,10 +14,10 @@ If no steps are specified, all three steps will be executed in sequence.
 import sys
 import os
 from datetime import datetime
-import importlib
 
 from CustomLLM.TrainLLM import TrainLLM
 from CustomLLM.EvaluateLLM import EvaluateLLM
+from CustomLLM.ReportLLM import ReportLLM
 
 def print_header(message):
     """Print a formatted header for steps in the process"""
@@ -79,24 +79,11 @@ def run_evaluate(model_path, test_mode=False):
     
     return results_path
 
-def run_report():
+def run_report(results_path):
     """Generate the performance report"""
     print_header("GENERATING PERFORMANCE REPORT")
-    
-    # Import the report generator module
-    try:
-        # Attempt to import the generate_report module
-        report_module = importlib.import_module("generate_report")
-        
-        # Run the main function
-        report_module.main()
-        
-        print("Report generation completed successfully!")
-    except ImportError:
-        print("Error: generate_report module not found.")
-        print("Make sure the generate_report.py file is in the current directory.")
-    except Exception as e:
-        print(f"Error generating report: {str(e)}")
+    reporter = ReportLLM(results_path)
+    reporter.run()
 
 def main():
     """Main function to orchestrate the complete flow"""
@@ -142,7 +129,7 @@ def main():
         print(f"Evaluation completed. Results saved to: {results_path}")
             
     if "report" in steps and results_path:
-        run_report()
+        run_report(results_path)
     
     print("\nComplete flow execution finished!")
 
