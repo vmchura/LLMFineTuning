@@ -7,7 +7,7 @@ This project fine-tunes a small LLM (Llama 3.2 1B) on waste management data for 
 - **Selected LLM**: Meta's Llama 3.2 1B Instruct model
 - **Pre-processing**: Questions and answers are formatted into instruction-tuning format
 - **Fine-tuning Method**: LoRA (Low-Rank Adaptation) for parameter-efficient fine-tuning
-- **Evaluation Metric**: GPTScore to measure similarity between model responses and expected answers
+- **Evaluation Metric**: ROUGE (Recall-Oriented Understudy for Gisting Evaluation) to measure similarity between model responses and expected answers
 
 ## Main Hyperparameters
 
@@ -30,7 +30,7 @@ This project fine-tunes a small LLM (Llama 3.2 1B) on waste management data for 
    - pandas
    - datasets
    - tqdm
-   - gpt-score
+   - rouge-score
    - accelerate
 
 ## How to Use
@@ -60,9 +60,9 @@ python evaluate.py
 ```
 
 This will:
-- Evaluate the base model on all questions
-- Evaluate the fine-tuned model on all questions
-- Calculate GPTScore for both models
+- Evaluate the base model on all questions using ROUGE score
+- Evaluate the fine-tuned model on all questions using ROUGE score
+- Calculate multiple ROUGE metrics (ROUGE-1, ROUGE-2, ROUGE-L)
 - Generate comparison results
 - Save detailed results to the `results` directory
 

@@ -1,5 +1,6 @@
 """
 Script to generate a report comparing model performance before and after fine-tuning
+using ROUGE scores
 """
 
 import json
@@ -7,6 +8,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 from datetime import datetime
+import numpy as np
 
 def load_results(base_path="results/base_model_results.json", ft_path="results/finetuned_model_results.json"):
     """Load evaluation results from JSON files"""
@@ -33,8 +35,8 @@ def create_comparison_table(base_results, ft_results):
     # Extract data for each question
     for i, (base_item, ft_item) in enumerate(zip(base_results["results"], ft_results["results"])):
         question = base_item["question"]
-        base_score = base_item["gpt_score"]
-        ft_score = ft_item["gpt_score"]
+        base_score = base_item["rouge_scores"]["average"]
+        ft_score = ft_item["rouge_scores"]["average"]
         improvement = ft_score - base_score
         
         data.append({
@@ -64,7 +66,7 @@ def plot_score_comparison(df):
     plt.bar([i + width for i in indices], df["Fine-tuned Score"], width, label="Fine-tuned Model")
     
     plt.xlabel("Question Index")
-    plt.ylabel("GPTScore")
+    plt.ylabel("Average ROUGE Score")
     plt.title("Model Performance Comparison: Base vs. Fine-tuned")
     plt.legend()
     plt.tight_layout()
@@ -73,13 +75,41 @@ def plot_score_comparison(df):
     plt.savefig("results/score_comparison.png")
     print("Created visualization: results/score_comparison.png")
 
+def plot_rouge_metrics(base_results, ft_results):
+    """Create a visualization of the different ROUGE metrics"""
+    if base_results is None or ft_results is None:
+        return
+    
+    metrics = ['rouge1', 'rouge2', 'rougeL', 'average']
+    base_scores = [base_results["average_scores"][m] for m in metrics]
+    ft_scores = [ft_results["average_scores"][m] for m in metrics]
+    
+    # Create bar chart
+    plt.figure(figsize=(10, 6))
+    indices = range(len(metrics))
+    width = 0.35
+    
+    plt.bar(indices, base_scores, width, label="Base Model")
+    plt.bar([i + width for i in indices], ft_scores, width, label="Fine-tuned Model")
+    
+    plt.xlabel("ROUGE Metric")
+    plt.ylabel("Score")
+    plt.title("ROUGE Metrics Comparison")
+    plt.xticks([i + width/2 for i in indices], ['ROUGE-1', 'ROUGE-2', 'ROUGE-L', 'Average'])
+    plt.legend()
+    plt.tight_layout()
+    
+    # Save figure
+    plt.savefig("results/rouge_metrics_comparison.png")
+    print("Created visualization: results/rouge_metrics_comparison.png")
+
 def generate_html_report(df, base_results, ft_results):
     """Generate an HTML report with the comparison results"""
     if df is None or base_results is None or ft_results is None:
         return
     
-    avg_base_score = base_results["average_score"]
-    avg_ft_score = ft_results["average_score"]
+    avg_base_score = base_results["average_scores"]["average"]
+    avg_ft_score = ft_results["average_scores"]["average"]
     improvement = avg_ft_score - avg_base_score
     improvement_percent = (improvement / avg_base_score * 100) if avg_base_score > 0 else 0
     
@@ -87,6 +117,27 @@ def generate_html_report(df, base_results, ft_results):
     
     # Convert DataFrame to HTML
     table_html = df.to_html(classes="table table-striped", index=False)
+    
+    # Create detailed ROUGE metrics table
+    rouge_metrics = ["rouge1", "rouge2", "rougeL", "average"]
+    rouge_names = ["ROUGE-1", "ROUGE-2", "ROUGE-L", "Average"]
+    
+    rouge_data = []
+    for metric, name in zip(rouge_metrics, rouge_names):
+        base_score = base_results["average_scores"][metric]
+        ft_score = ft_results["average_scores"][metric]
+        improvement = ft_score - base_score
+        improvement_pct = (improvement / base_score * 100) if base_score > 0 else 0
+        
+        rouge_data.append({
+            "Metric": name,
+            "Base Model": f"{base_score:.4f}",
+            "Fine-tuned Model": f"{ft_score:.4f}",
+            "Improvement": f"{improvement:.4f} ({improvement_pct:.2f}%)"
+        })
+    
+    rouge_df = pd.DataFrame(rouge_data)
+    rouge_table_html = rouge_df.to_html(classes="table table-striped", index=False)
     
     # HTML template
     html_content = f"""
@@ -110,12 +161,16 @@ def generate_html_report(df, base_results, ft_results):
             
             <div class="summary-box">
                 <h2>Performance Summary</h2>
-                <p>Base Model Average GPTScore: <span class="highlight">{avg_base_score:.4f}</span></p>
-                <p>Fine-tuned Model Average GPTScore: <span class="highlight">{avg_ft_score:.4f}</span></p>
+                <p>Base Model Average ROUGE Score: <span class="highlight">{avg_base_score:.4f}</span></p>
+                <p>Fine-tuned Model Average ROUGE Score: <span class="highlight">{avg_ft_score:.4f}</span></p>
                 <p>Improvement: <span class="highlight">{improvement:.4f}</span> ({improvement_percent:.2f}%)</p>
             </div>
             
-            <h2>Visualization</h2>
+            <h2>ROUGE Metrics Comparison</h2>
+            {rouge_table_html}
+            <img src="rouge_metrics_comparison.png" class="img-fluid" alt="ROUGE Metrics Comparison">
+            
+            <h2>Per-Question Performance</h2>
             <img src="score_comparison.png" class="img-fluid" alt="Score Comparison">
             
             <h2>Detailed Results</h2>
@@ -124,7 +179,7 @@ def generate_html_report(df, base_results, ft_results):
             <h2>Model Information</h2>
             <p>Base Model: meta-llama/Llama-3.2-1B-Instruct</p>
             <p>Fine-tuning Method: LoRA (Low-Rank Adaptation)</p>
-            <p>Evaluation Metric: GPTScore</p>
+            <p>Evaluation Metric: ROUGE (Recall-Oriented Understudy for Gisting Evaluation)</p>
         </div>
     </body>
     </html>
@@ -150,6 +205,9 @@ def main():
     
     # Plot comparison
     plot_score_comparison(df)
+    
+    # Plot ROUGE metrics comparison
+    plot_rouge_metrics(base_results, ft_results)
     
     # Generate HTML report
     generate_html_report(df, base_results, ft_results)
