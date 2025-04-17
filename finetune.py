@@ -21,7 +21,7 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"Using device: {DEVICE}")
 
 # Model configuration
-MODEL_NAME = "meta-llama/Llama-3.2-1B-Instruct"  # Small 1B parameter model
+MODEL_NAME = "Qwen/Qwen2-0.5B-Instruct"  # Small 1B parameter model
 OUTPUT_DIR = "output"
 LORA_R = 8
 LORA_ALPHA = 16

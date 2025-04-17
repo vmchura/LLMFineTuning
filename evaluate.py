@@ -17,7 +17,7 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"Using device: {DEVICE}")
 
 # Model paths
-BASE_MODEL = "meta-llama/Llama-3.2-1B-Instruct"
+BASE_MODEL = "Qwen/Qwen2-0.5B-Instruct"
 FINETUNED_MODEL = "output/final_model"
 
 def load_questions(file_path="question_answer.csv"):
