@@ -42,25 +42,37 @@ class TrainLLM(object):
 
     def prepare_model(self):
         """Initialize and prepare the model for training"""
-        # Quantization configuration for memory efficiency
-        bnb_config = BitsAndBytesConfig(
-            load_in_4bit=True,
-            bnb_4bit_quant_type="nf4",
-            bnb_4bit_compute_dtype=torch.float16,
-            bnb_4bit_use_double_quant=True,
-        )
-
         # Load model and tokenizer
         tokenizer = AutoTokenizer.from_pretrained(self.model_name)
-        model = AutoModelForCausalLM.from_pretrained(
-            self.model_name,
-            quantization_config=bnb_config,
-            device_map="auto",
-        )
+        
+        # Check if CUDA is available
+        if torch.cuda.is_available():
+            # Quantization configuration for memory efficiency when CUDA is available
+            bnb_config = BitsAndBytesConfig(
+                load_in_4bit=True,
+                bnb_4bit_quant_type="nf4",
+                bnb_4bit_compute_dtype=torch.float16,
+                bnb_4bit_use_double_quant=True,
+            )
+            
+            # Load model with quantization
+            model = AutoModelForCausalLM.from_pretrained(
+                self.model_name,
+                quantization_config=bnb_config,
+                device_map="auto",
+            )
+        else:
+            # Load model without quantization for CPU
+            print("CUDA not available, loading model in standard mode for CPU.")
+            model = AutoModelForCausalLM.from_pretrained(
+                self.model_name,
+                device_map="cpu",
+            )
 
         # Prepare for training with LoRA
-        model = prepare_model_for_kbit_training(model)
-
+        if torch.cuda.is_available():
+            model = prepare_model_for_kbit_training(model)
+        
         # LoRA configuration - simplified target modules for test
         peft_config = LoraConfig(
             r=self.parameters['LORA_R'],
@@ -100,7 +112,7 @@ class TrainLLM(object):
             save_steps=self.parameters['SAVE_STEPS'],  # Save at the end
             report_to="none",  # Disable Wandb reporting
             remove_unused_columns=False,
-            fp16=True,  # Mixed precision training
+            fp16=torch.cuda.is_available(),  # Mixed precision training only if CUDA is available
         )
 
         # Initialize trainer

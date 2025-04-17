@@ -13,6 +13,7 @@ If no steps are specified, all three steps will be executed in sequence.
 
 import sys
 import os
+import importlib
 from datetime import datetime
 
 from CustomLLM.TrainLLM import TrainLLM
@@ -32,8 +33,10 @@ def run_train(test_mode=False):
     
     # Set up paths
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    # Create models directory if it doesn't exist
+    os.makedirs("models", exist_ok=True)
     output_path = f"models/finetuned_{timestamp}"
-    
+
     # Set default parameters
     parameters = {}
     
@@ -51,7 +54,7 @@ def run_train(test_mode=False):
     # Initialize and run training
     trainer = TrainLLM(output_path, parameters)
     trainer.run()
-    
+
     # Return the path where the model was saved
     return f"{output_path}/final_model"
 

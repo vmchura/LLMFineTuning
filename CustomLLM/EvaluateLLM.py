@@ -63,11 +63,20 @@ class EvaluateLLM:
 
         # Load model and tokenizer
         tokenizer = AutoTokenizer.from_pretrained(model_path)
-        model = AutoModelForCausalLM.from_pretrained(
-            model_path,
-            device_map=self.device,
-            torch_dtype=torch.float16
-        )
+
+        # Check if CUDA is available
+        if torch.cuda.is_available():
+            model = AutoModelForCausalLM.from_pretrained(
+                model_path,
+                device_map=self.device,
+                torch_dtype=torch.float16
+            )
+        else:
+            print("CUDA not available, loading model in standard mode for CPU.")
+            model = AutoModelForCausalLM.from_pretrained(
+                model_path,
+                device_map="cpu"
+            )
 
         results = []
         all_scores = {
