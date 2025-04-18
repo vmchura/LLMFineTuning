@@ -30,7 +30,7 @@ class TrainLLM(object):
         } | parameters
 
     def process_row_question_answer(self, row):
-        return f"<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\n{row['Question']}<|im_end|>\n<|im_start|>assistant\n{row['Answer']}<|im_end|>\n",
+        return f"<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\n{row['Question']}<|im_end|>\n<|im_start|>assistant\n{row['Answer']}<|im_end|>\n"
 
     def load_data(self):
         df = pd.read_csv('question_answer.csv', header=0)
@@ -90,7 +90,9 @@ class TrainLLM(object):
 
     def preprocess_data(self, dataset, tokenizer):
         def tokenize_function(examples):
-            return tokenizer(examples["text"], truncation=True, max_length=512)
+            # Ensure text is properly formatted for the tokenizer
+            texts = examples["text"]
+            return tokenizer(texts, truncation=True, max_length=512, padding="max_length")
 
         tokenized_dataset = dataset.map(tokenize_function, batched=True)
         return tokenized_dataset
