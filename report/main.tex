@@ -75,7 +75,7 @@
         \item MAX\_ITERATIONS: 1000,
     \end{itemize}
 
-
+    \newpage
     \section{Output of evaluation}
     \begin{center}
         \begin{figure}
@@ -101,6 +101,7 @@
     Clearly we can see a valid response from the fine-tuned model.
     And this also proves the correct setup of the Evaluation step.
 
+    \newpage
     \section{Functional and commented code with prerequisites.}
     All code used for all the steps, and even for this report are in the GitHub repository: \href{https://github.com/vmchura/LLMFineTuning}{vmchura/LLMFineTuning}
     Explanation of main modules:
@@ -116,5 +117,10 @@
         \item report\_questions.ipynb, when the service of ollama is open and both models, the base and fine-tuned are open I use this script to generate the responses of each model.
         \item requirements.txt, python packages needed to execute all code.
     \end{enumerate}
+    \newpage
+    \section{Questions, answers before fine-tuning.}
+    \include{responses_questions/model_A}
+    \section{Questions, answers after fine-tuning.}
+    \include{responses_questions/model_B}
     \include{chatgptreport}
 \end{document}
