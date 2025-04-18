@@ -43,11 +43,11 @@ def run_train(test_mode=False):
     if test_mode:
         # Use testing parameters for quick runs
         parameters = {
-            'MAX_ITERATIONS': 2,
+            'MAX_ITERATIONS': 20,
             'USE_SUBSET': True,
-            'SUBSET_SIZE': 5,
-            'GRADIENT_ACCUMULATION_STEP': 1,
-            'SAVE_STEPS': 2
+            'SUBSET_SIZE': 20,
+            'GRADIENT_ACCUMULATION_STEP': 2,
+            'SAVE_STEPS': 10
         }
         print("Running in TEST mode with reduced parameters.")
     
