@@ -45,6 +45,11 @@ class TrainLLM(object):
         # Load model and tokenizer
         tokenizer = AutoTokenizer.from_pretrained(self.model_name)
         
+        # Ensure the tokenizer has padding token and end-of-sequence token
+        if tokenizer.pad_token is None:
+            tokenizer.pad_token = tokenizer.eos_token
+            print("Set pad_token to eos_token because it was None")
+        
         # Check if CUDA is available
         if torch.cuda.is_available():
             # Quantization configuration for memory efficiency when CUDA is available
@@ -92,9 +97,28 @@ class TrainLLM(object):
         def tokenize_function(examples):
             # Ensure text is properly formatted for the tokenizer
             texts = examples["text"]
-            return tokenizer(texts, truncation=True, max_length=512, padding="max_length")
+            # Add return_tensors='pt' to get pytorch tensors directly
+            result = tokenizer(
+                texts, 
+                truncation=True, 
+                max_length=512, 
+                padding='max_length',
+                return_tensors=None  # Don't specify return_tensors here as it will be handled by the data collator
+            )
+            # Set the 'labels' field to the input_ids for causal language modeling
+            result["labels"] = result["input_ids"].copy()
+            return result
 
-        tokenized_dataset = dataset.map(tokenize_function, batched=True)
+        # Process all examples in batches and keep all columns
+        tokenized_dataset = dataset.map(
+            tokenize_function, 
+            batched=True, 
+            remove_columns=["text"]  # Remove the original text column as it's no longer needed
+        )
+        
+        # Set format to PyTorch tensors
+        tokenized_dataset.set_format(type='torch', columns=['input_ids', 'attention_mask', 'labels'])
+        
         return tokenized_dataset
 
     def train_model(self, model, tokenizer, dataset):
@@ -106,19 +130,30 @@ class TrainLLM(object):
         training_args = TrainingArguments(
             output_dir=self.output_path,
             per_device_train_batch_size=self.parameters['BATCH_SIZE'],
-            gradient_accumulation_steps=self.parameters['GRADIENT_ACCUMULATION_STEP'],  # Reduced for testing
+            gradient_accumulation_steps=self.parameters['GRADIENT_ACCUMULATION_STEP'],
             learning_rate=self.parameters['LEARNING_RATE'],
-            max_steps=self.parameters['MAX_ITERATIONS'],  # Just do a few steps for testing
+            max_steps=self.parameters['MAX_ITERATIONS'],
             logging_steps=1,
             save_strategy="steps",
-            save_steps=self.parameters['SAVE_STEPS'],  # Save at the end
+            save_steps=self.parameters['SAVE_STEPS'],
             report_to="none",  # Disable Wandb reporting
-            remove_unused_columns=False,
-            fp16=torch.cuda.is_available(),  # Mixed precision training only if CUDA is available
+            remove_unused_columns=False,  # Important for our custom dataset
+            fp16=torch.cuda.is_available(),
+            # Add these parameters to prevent data format issues
+            group_by_length=False,
+            dataloader_drop_last=False,
+            dataloader_num_workers=0,
         )
 
-        # Initialize trainer
-        data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
+        # Initialize trainer with a data collator that handles padding
+        # DataCollatorForLanguageModeling is appropriate for causal LM tasks
+        data_collator = DataCollatorForLanguageModeling(
+            tokenizer=tokenizer,
+            mlm=False,  # Not using masked language modeling
+            pad_to_multiple_of=8 if torch.cuda.is_available() else None  # Important for mixed precision training
+        )
+        
+        # Create the trainer
         trainer = Trainer(
             model=model,
             args=training_args,
