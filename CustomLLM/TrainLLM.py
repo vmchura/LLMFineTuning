@@ -22,11 +22,11 @@ class TrainLLM(object):
             'LORA_DROPOUT': 0.05,
             'LEARNING_RATE': 1e-4,
             'BATCH_SIZE': 2,
-            'MAX_ITERATIONS': 100,
+            'MAX_ITERATIONS': 1000,
             'USE_SUBSET': False, # Test
             'SUBSET_SIZE': None, # Test
-            'GRADIENT_ACCUMULATION_STEP': 4,
-            'SAVE_STEPS': 50
+            'GRADIENT_ACCUMULATION_STEP': 10,
+            'SAVE_STEPS': 100
         } | parameters
 
     def process_row_question_answer(self, row):
