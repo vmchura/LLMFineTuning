@@ -1,0 +1,169 @@
+\section{Report GPTScore}
+
+The next report is based on a big LLM, here is the prompt that I've used:
+\begin{center}
+\includegraphics[width=0.8\textwidth]{prompt_report}
+\end{center}
+
+
+This report presents a comprehensive evaluation of two language models (Model A and Model B) based on their responses to a set of 24 questions about waste management in Olot. The evaluation follows the GPTscore methodology, which assesses responses based on four criteria:
+
+\begin{enumerate}
+    \item \textbf{Semantic Similarity} (0-10): How well the response conveys the same meaning as the ideal reference response.
+    \item \textbf{Completeness} (0-10): Whether the response covers all necessary information.
+    \item \textbf{Factual Accuracy} (0-10): Whether the response contains correct and verifiable information.
+    \item \textbf{Fluency and Clarity} (0-10): How well-structured and easily understandable the response is.
+\end{enumerate}
+
+Each model's responses were compared to the ideal reference responses, and scores were assigned based on the criteria above.
+
+
+\section{Overall Results}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{lcc}
+        \toprule
+        \textbf{Criterion}     & \textbf{Model A Score} & \textbf{Model B Score} \\
+        \midrule
+        Semantic Similarity    & 2.1                    & 6.8                    \\
+        Completeness           & 2.3                    & 6.5                    \\
+        Factual Accuracy       & 1.8                    & 6.2                    \\
+        Fluency and Clarity    & 5.2                    & 6.3                    \\
+        \midrule
+        \textbf{Average Score} & \textbf{2.9}           & \textbf{6.5}           \\
+        \bottomrule
+    \end{tabular}
+    \caption{Average scores across all questions for each model and criterion}
+\end{table}
+
+
+\section{Detailed Evaluation}
+
+\subsection{Model A Analysis}
+
+Model A's responses demonstrate significant deficiencies across all evaluation criteria. The model frequently:
+
+\begin{itemize}
+    \item Admits to not having specific information about Olot or its waste management services
+    \item Provides overly general information unrelated to the specific context
+    \item Contains factual inaccuracies when it attempts to provide concrete information
+    \item References incorrect geographic locations (e.g., referring to Olot as "Olt" or associating it with China)
+    \item Presents overly verbose responses that do not directly answer the questions
+\end{itemize}
+
+While Model A's responses are generally well-structured and fluent from a linguistic perspective, the content is often entirely disconnected from the specific context of Olot's waste management system.
+
+\subsection{Model B Analysis}
+
+Model B's responses are significantly better aligned with the ideal reference answers. The model generally:
+
+\begin{itemize}
+    \item Provides relevant information about Olot's waste management systems
+    \item Exhibits reasonable factual accuracy on most topics
+    \item Offers concise and direct answers to the questions
+    \item Maintains consistent information across related questions
+\end{itemize}
+
+However, Model B still has some notable issues:
+\begin{itemize}
+    \item Occasional inclusion of non-English text (Chinese characters appear in some responses)
+    \item Some numerical information differs from the reference answers
+    \item A few factual inaccuracies regarding operational details
+    \item Some confusion about organizational structures and responsibilities
+\end{itemize}
+
+
+\section{Detailed Scoring Table}
+
+\begin{longtable}{p{5cm}|cccc|cccc}
+    \toprule
+    \multirow{2}{*}{\textbf{Question}} & \multicolumn{4}{c|}{\textbf{Model A Scores}} & \multicolumn{4}{c}{\textbf{Model B Scores}} \\
+    \cmidrule(lr){2-5} \cmidrule(lr){6-9}
+    & \textbf{Sem} & \textbf{Comp} & \textbf{Fact} & \textbf{Flu} & \textbf{Sem} & \textbf{Comp} & \textbf{Fact} & \textbf{Flu} \\
+    \midrule
+    \endhead
+    Workers in garbage collection        & 0            & 0             & 0             & 5            & 9            & 8             & 9             & 9            \\
+    \hline
+    Working day shifts                   & 2            & 1             & 1             & 4            & 8            & 7             & 9             & 9            \\
+    \hline
+    Waste collection routes              & 0            & 0             & 0             & 4            & 6            & 6             & 5             & 8            \\
+    \hline
+    Workers per route                    & 0            & 0             & 0             & 3            & 6            & 7             & 5             & 8            \\
+    \hline
+    Condition of collection trucks       & 4            & 3             & 2             & 5            & 6            & 5             & 6             & 5            \\
+    \hline
+    Monthly diesel consumption           & 0            & 0             & 0             & 4            & 3            & 3             & 2             & 7            \\
+    \hline
+    Gender percentage                    & 1            & 0             & 0             & 4            & 5            & 5             & 4             & 5            \\
+    \hline
+    Responsible for management           & 5            & 4             & 3             & 7            & 4            & 3             & 3             & 6            \\
+    \hline
+    Collection system type               & 0            & 0             & 0             & 3            & 6            & 5             & 5             & 7            \\
+    \hline
+    Monthly residual waste               & 2            & 2             & 1             & 4            & 5            & 6             & 4             & 7            \\
+    \hline
+    Monthly packaging waste              & 3            & 3             & 1             & 6            & 5            & 7             & 4             & 8            \\
+    \hline
+    Monthly organic waste                & 2            & 3             & 1             & 5            & 6            & 7             & 5             & 8            \\
+    \hline
+    Working days                         & 1            & 0             & 0             & 4            & 7            & 6             & 5             & 7            \\
+    \hline
+    Common truck issues                  & 6            & 5             & 4             & 7            & 8            & 7             & 7             & 7            \\
+    \hline
+    Weekly landfill trips                & 2            & 1             & 1             & 4            & 9            & 8             & 10            & 8            \\
+    \hline
+    Areas with most waste                & 3            & 3             & 2             & 6            & 8            & 7             & 7             & 5            \\
+    \hline
+    Types and distribution of containers & 0            & 0             & 0             & 0            & 7            & 6             & 6             & 6            \\
+    \hline
+    Bulky waste collection               & 4            & 4             & 2             & 7            & 6            & 6             & 5             & 7            \\
+    \hline
+    Recycling rate                       & 0            & 0             & 0             & 0            & 10           & 9             & 9             & 9            \\
+    \hline
+    Penalties for incorrect recycling    & 5            & 4             & 3             & 7            & 8            & 7             & 7             & 8            \\
+    \hline
+    Street cleaning frequency            & 5            & 5             & 3             & 7            & 5            & 4             & 4             & 3            \\
+    \hline
+    Company for truck maintenance        & 1            & 0             & 0             & 6            & 5            & 5             & 4             & 7            \\
+    \hline
+    Tourism impact on waste              & 4            & 5             & 3             & 8            & 9            & 9             & 9             & 8            \\
+    \hline
+    Campaigns for waste collection       & 3            & 5             & 3             & 8            & 7            & 7             & 6             & 4            \\
+    \hline
+    \textbf{Average}                     & \textbf{2.1} & \textbf{2.3}  & \textbf{1.8}  & \textbf{5.2} & \textbf{6.8} & \textbf{6.5} & \textbf{6.2} & \textbf{6.3} \\
+    \bottomrule
+    \caption{Detailed scores for each question and criterion (Sem = Semantic Similarity, Comp = Completeness, Fact = Factual Accuracy, Flu = Fluency and Clarity)}
+\end{longtable}
+
+
+\section{Key Observations}
+
+\subsection{Model A}
+\begin{itemize}
+    \item \textbf{Knowledge gaps}: Model A consistently demonstrates a lack of specific knowledge about Olot and its waste management system.
+    \item \textbf{Evasiveness}: Many responses begin with "I apologize, but I don't have specific information..." or similar disclaimers.
+    \item \textbf{Geographic confusion}: The model often refers to Olot as "Olt" and sometimes incorrectly associates it with China or other locations.
+    \item \textbf{Verbose non-answers}: Provides lengthy, general discussions that fail to address the specific questions.
+    \item \textbf{Hallucinations}: When attempting to provide specific information, the model often invents facts that are incorrect.
+\end{itemize}
+
+\subsection{Model B}
+\begin{itemize}
+    \item \textbf{Better domain knowledge}: Shows general understanding of waste management in Olot.
+    \item \textbf{Numerical discrepancies}: Some numbers (routes, tonnage, etc.) differ from the reference answers.
+    \item \textbf{Language issues}: Several responses contain Chinese characters, suggesting potential training or processing issues.
+    \item \textbf{Organizational confusion}: Some misunderstanding of the management structure and responsibilities.
+    \item \textbf{Good consistency}: Maintains reasonable consistency across related questions.
+\end{itemize}
+
+
+\section{Conclusion}
+
+Based on the GPTscore evaluation, Model B significantly outperforms Model A across all evaluation criteria. Model B's responses demonstrate better understanding of the specific context, higher factual accuracy, and more complete answers that align with the reference responses.
+
+Model A's responses are often generic, evasive, or contain hallucinated information unrelated to Olot's waste management system. While the responses are generally well-structured linguistically, the content rarely addresses the specific questions accurately.
+
+Model B, while not perfect, provides substantially more useful and accurate information. The main areas for improvement include addressing the language mixing issues (Chinese text appearing in responses), improving numerical accuracy, and enhancing understanding of organizational structures.
+
+For applications requiring accurate information about Olot's waste management system, Model B would be the clearly superior choice between these two options.
