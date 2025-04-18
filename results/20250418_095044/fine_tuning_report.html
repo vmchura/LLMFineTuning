@@ -1,0 +1,259 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>LLM Fine-tuning Results</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+            <style>
+                body { padding: 20px; }
+                .summary-box { background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin-bottom: 20px; }
+                .highlight { font-weight: bold; color: #0d6efd; }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <h1>LLM Fine-tuning Results Report</h1>
+                <p class="text-muted">Generated on 2025-04-18 10:35:37</p>
+                
+                <div class="summary-box">
+                    <h2>Performance Summary</h2>
+                    <p>Base Model Average ROUGE Score: <span class="highlight">0.1440</span></p>
+                    <p>Fine-tuned Model Average ROUGE Score: <span class="highlight">0.3280</span></p>
+                    <p>Improvement: <span class="highlight">0.1840</span> (127.79%)</p>
+                </div>
+                
+                <h2>ROUGE Metrics Comparison</h2>
+                <table border="1" class="dataframe table table-striped">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Metric</th>
+      <th>Base Model</th>
+      <th>Fine-tuned Model</th>
+      <th>Improvement</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ROUGE-1</td>
+      <td>0.2131</td>
+      <td>0.4072</td>
+      <td>0.1941 (91.13%)</td>
+    </tr>
+    <tr>
+      <td>ROUGE-2</td>
+      <td>0.0650</td>
+      <td>0.2410</td>
+      <td>0.1760 (270.92%)</td>
+    </tr>
+    <tr>
+      <td>ROUGE-L</td>
+      <td>0.1540</td>
+      <td>0.3358</td>
+      <td>0.1819 (118.12%)</td>
+    </tr>
+    <tr>
+      <td>Average</td>
+      <td>0.1440</td>
+      <td>0.3280</td>
+      <td>0.1840 (127.79%)</td>
+    </tr>
+  </tbody>
+</table>
+                <img src="rouge_metrics_comparison.png" class="img-fluid" alt="ROUGE Metrics Comparison">
+                
+                <h2>Per-Question Performance</h2>
+                <img src="score_comparison.png" class="img-fluid" alt="Score Comparison">
+                
+                <h2>Detailed Results</h2>
+                <table border="1" class="dataframe table table-striped">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Question</th>
+      <th>Base Score</th>
+      <th>Fine-tuned Score</th>
+      <th>Improvement</th>
+      <th>Improvement %</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>How many workers are part of the garbage collection and cleaning service in Olot?</td>
+      <td>0.161076</td>
+      <td>0.260582</td>
+      <td>0.099506</td>
+      <td>61.775643</td>
+    </tr>
+    <tr>
+      <td>How many shifts is the working day divided into?</td>
+      <td>0.131214</td>
+      <td>0.765850</td>
+      <td>0.634636</td>
+      <td>483.665777</td>
+    </tr>
+    <tr>
+      <td>How many waste collection routes are established?</td>
+      <td>0.086022</td>
+      <td>0.181763</td>
+      <td>0.095742</td>
+      <td>111.299819</td>
+    </tr>
+    <tr>
+      <td>How many workers are assigned per route?</td>
+      <td>0.080808</td>
+      <td>0.433692</td>
+      <td>0.352884</td>
+      <td>436.693548</td>
+    </tr>
+    <tr>
+      <td>What is the general condition of the collection trucks?</td>
+      <td>0.085470</td>
+      <td>0.178091</td>
+      <td>0.092621</td>
+      <td>108.366935</td>
+    </tr>
+    <tr>
+      <td>How many liters of diesel are consumed monthly?</td>
+      <td>0.114532</td>
+      <td>0.216687</td>
+      <td>0.102155</td>
+      <td>89.192956</td>
+    </tr>
+    <tr>
+      <td>What is the percentage of men and women working in the service?</td>
+      <td>0.051027</td>
+      <td>0.231527</td>
+      <td>0.180500</td>
+      <td>353.733792</td>
+    </tr>
+    <tr>
+      <td>Who is responsible for managing waste collection and cleaning in Olot?</td>
+      <td>0.137737</td>
+      <td>0.313978</td>
+      <td>0.176242</td>
+      <td>127.955390</td>
+    </tr>
+    <tr>
+      <td>What type of collection system is used? Is it door-to-door or another model?</td>
+      <td>0.147486</td>
+      <td>0.238028</td>
+      <td>0.090542</td>
+      <td>61.390372</td>
+    </tr>
+    <tr>
+      <td>How many tons of residual waste are collected monthly?</td>
+      <td>0.131819</td>
+      <td>0.417614</td>
+      <td>0.285794</td>
+      <td>216.807391</td>
+    </tr>
+    <tr>
+      <td>How many tons of packaging waste are collected monthly?</td>
+      <td>0.115405</td>
+      <td>0.321148</td>
+      <td>0.205743</td>
+      <td>178.279344</td>
+    </tr>
+    <tr>
+      <td>How many tons of organic waste are collected monthly?</td>
+      <td>0.160734</td>
+      <td>0.422939</td>
+      <td>0.262205</td>
+      <td>163.129428</td>
+    </tr>
+    <tr>
+      <td>On which days of the week do the workers operate?</td>
+      <td>0.306983</td>
+      <td>0.370115</td>
+      <td>0.063132</td>
+      <td>20.565340</td>
+    </tr>
+    <tr>
+      <td>What are the most common issues with the collection trucks?</td>
+      <td>0.169270</td>
+      <td>0.490490</td>
+      <td>0.321221</td>
+      <td>189.768679</td>
+    </tr>
+    <tr>
+      <td>How many trips are made to the landfill each week?</td>
+      <td>0.167133</td>
+      <td>0.295900</td>
+      <td>0.128768</td>
+      <td>77.045222</td>
+    </tr>
+    <tr>
+      <td>Which areas in Olot generate the most waste?</td>
+      <td>0.130435</td>
+      <td>0.365150</td>
+      <td>0.234715</td>
+      <td>179.948459</td>
+    </tr>
+    <tr>
+      <td>What types of waste containers exist in Olot, and how are they distributed?</td>
+      <td>0.080000</td>
+      <td>0.229972</td>
+      <td>0.149972</td>
+      <td>187.464986</td>
+    </tr>
+    <tr>
+      <td>How is the collection of bulky waste and old furniture managed in Olot?</td>
+      <td>0.300651</td>
+      <td>0.380726</td>
+      <td>0.080075</td>
+      <td>26.633997</td>
+    </tr>
+    <tr>
+      <td>What is the recycling rate in Olot?</td>
+      <td>0.152775</td>
+      <td>0.401434</td>
+      <td>0.248658</td>
+      <td>162.760525</td>
+    </tr>
+    <tr>
+      <td>Are there penalties for not recycling correctly in Olot?</td>
+      <td>0.138618</td>
+      <td>0.282598</td>
+      <td>0.143981</td>
+      <td>103.868632</td>
+    </tr>
+    <tr>
+      <td>How is street cleaning carried out in Olot, and how frequently?</td>
+      <td>0.164341</td>
+      <td>0.323837</td>
+      <td>0.159496</td>
+      <td>97.051551</td>
+    </tr>
+    <tr>
+      <td>Which company is responsible for maintaining and repairing the collection trucks?</td>
+      <td>0.143421</td>
+      <td>0.148413</td>
+      <td>0.004992</td>
+      <td>3.480554</td>
+    </tr>
+    <tr>
+      <td>How does tourism affect waste generation in Olot?</td>
+      <td>0.112376</td>
+      <td>0.383754</td>
+      <td>0.271377</td>
+      <td>241.489900</td>
+    </tr>
+    <tr>
+      <td>What campaigns have been implemented in Olot to improve selective waste collection?</td>
+      <td>0.186610</td>
+      <td>0.217917</td>
+      <td>0.031308</td>
+      <td>16.777035</td>
+    </tr>
+  </tbody>
+</table>
+                
+                <h2>Model Information</h2>
+                <p>Base Model: meta-llama/Llama-3.2-1B-Instruct</p>
+                <p>Fine-tuning Method: LoRA (Low-Rank Adaptation)</p>
+                <p>Evaluation Metric: ROUGE (Recall-Oriented Understudy for Gisting Evaluation)</p>
+            </div>
+        </body>
+        </html>
+        

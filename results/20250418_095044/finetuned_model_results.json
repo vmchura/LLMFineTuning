@@ -1,0 +1,274 @@
+{
+  "results": [
+    {
+      "question": "How many workers are part of the garbage collection and cleaning service in Olot?",
+      "expected_answer": "Olot's garbage collection and cleaning service has a fixed workforce of 38 workers, distributed in different shifts and routes to ensure coverage of the entire city.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nHow many workers are part of the garbage collection and cleaning service in Olot?\nassistant\nThe service is composed of 7 workers, each with 2 shifts, performing tasks such as sorting waste and keeping lines clear at night.",
+      "rouge_scores": {
+        "rouge1": 0.3888888888888889,
+        "rouge2": 0.14285714285714285,
+        "rougeL": 0.25,
+        "average": 0.2605820105820106
+      }
+    },
+    {
+      "question": "How many shifts is the working day divided into?",
+      "expected_answer": "The working day is divided into 3 shifts: morning, afternoon, and night. The shifts are structured to meet operational needs, with most of the work done in the morning and at night.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nHow many shifts is the working day divided into?\nassistant\nThe working day is divided into 3 shifts: morning, afternoon, and night. The shifts are structured to meet operational needs, with most work done in the morning and at night.",
+      "rouge_scores": {
+        "rouge1": 0.7848101265822784,
+        "rouge2": 0.7532467532467533,
+        "rougeL": 0.759493670886076,
+        "average": 0.7658501835717025
+      }
+    },
+    {
+      "question": "How many waste collection routes are established?",
+      "expected_answer": "There are currently 6 established routes: 2 operate in the morning and 4 at night, covering different areas of the city to ensure efficient collection.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nHow many waste collection routes are established?\nassistant\nThere are currently 10 established waste collection routes.",
+      "rouge_scores": {
+        "rouge1": 0.24999999999999994,
+        "rouge2": 0.08695652173913043,
+        "rougeL": 0.20833333333333331,
+        "average": 0.18176328502415454
+      }
+    },
+    {
+      "question": "How many workers are assigned per route?",
+      "expected_answer": "Each route typically has 3 workers assigned. However, on some morning routes, only 2 workers may be assigned depending on the workload.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nHow many workers are assigned per route?\nassistant\nEach route typically has 3 workers assigned to each shift. However, on some routes, there may be as few as 2 workers assigned per shift.",
+      "rouge_scores": {
+        "rouge1": 0.5161290322580645,
+        "rouge2": 0.3333333333333333,
+        "rougeL": 0.45161290322580644,
+        "average": 0.4336917562724014
+      }
+    },
+    {
+      "question": "What is the general condition of the collection trucks?",
+      "expected_answer": "The trucks are over 10 years old and have suffered considerable wear due to intensive use. They often experience issues such as corrosion, mechanical wear, and hydraulic system failures.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nWhat is the general condition of the collection trucks?\nassistant\nThe trucks are regularly checked for wear and damage, and any major failures are promptly repaired or replaced.",
+      "rouge_scores": {
+        "rouge1": 0.25,
+        "rouge2": 0.0967741935483871,
+        "rougeL": 0.1875,
+        "average": 0.17809139784946237
+      }
+    },
+    {
+      "question": "How many liters of diesel are consumed monthly?",
+      "expected_answer": "The collection service consumes approximately 10,000 liters of diesel per month to power the fleet of trucks, machines, and cars.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nHow many liters of diesel are consumed monthly?\nassistant\nThe consumption of diesel per month is between 150 and 200 liters. This amount varies depending on the use, with mostly transport and cooking uses consuming the most.",
+      "rouge_scores": {
+        "rouge1": 0.30769230769230765,
+        "rouge2": 0.12698412698412698,
+        "rougeL": 0.21538461538461537,
+        "average": 0.21668701668701665
+      }
+    },
+    {
+      "question": "What is the percentage of men and women working in the service?",
+      "expected_answer": "Currently, the service has 24% women and 76% men in its workforce.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nWhat is the percentage of men and women working in the service?\nassistant\nCurrently, the service has 21% women and 79% men working in it. This difference can vary depending on different factors such as recruitment and retention rates.",
+      "rouge_scores": {
+        "rouge1": 0.27586206896551724,
+        "rouge2": 0.14285714285714285,
+        "rougeL": 0.27586206896551724,
+        "average": 0.23152709359605908
+      }
+    },
+    {
+      "question": "Who is responsible for managing waste collection and cleaning in Olot?",
+      "expected_answer": "The service is managed by the private company IFGA-URBASER, operating under contract with the Olot City Council for waste collection and street cleaning.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nWho is responsible for managing waste collection and cleaning in Olot?\nassistant\nThe city is managed by a city company, and waste collection is carried out by private companies under contract.",
+      "rouge_scores": {
+        "rouge1": 0.48387096774193544,
+        "rouge2": 0.2,
+        "rougeL": 0.2580645161290323,
+        "average": 0.3139784946236559
+      }
+    },
+    {
+      "question": "What type of collection system is used? Is it door-to-door or another model?",
+      "expected_answer": "Olot uses a centralized collection system with containers distributed throughout the city. However, in the urban core, a door-to-door collection system is implemented to improve waste management in higher-density areas.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nWhat type of collection system is used? Is it door-to-door or another model?\nassistant\nThe collection system is through door-to-door service. Customers visit different stores to receive their packaging and recycling materials.",
+      "rouge_scores": {
+        "rouge1": 0.31578947368421056,
+        "rouge2": 0.13513513513513511,
+        "rougeL": 0.2631578947368421,
+        "average": 0.23802750118539592
+      }
+    },
+    {
+      "question": "How many tons of residual waste are collected monthly?",
+      "expected_answer": "Each month, between 700 and 750 tons of residual waste are collected. This amount decreases slightly in summer due to seasonal consumption variations.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nHow many tons of residual waste are collected monthly?\nassistant\nEach month, between 250 and 300 tons of residual waste are collected. This amount decreases slightly during special events such as\u6625\u8282\uff08New Year's Day\uff09\u548c\u590f\u5b63\uff08Summer\uff09\u5b63\u8282\u3002",
+      "rouge_scores": {
+        "rouge1": 0.4545454545454546,
+        "rouge2": 0.34375000000000006,
+        "rougeL": 0.4545454545454546,
+        "average": 0.4176136363636364
+      }
+    },
+    {
+      "question": "How many tons of packaging waste are collected monthly?",
+      "expected_answer": "Each month, between 130 and 140 tons of packaging waste are collected. As with other waste fractions, packaging waste generation is lower in summer.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nHow many tons of packaging waste are collected monthly?\nassistant\nEach month, between 40 and 50 tons of packaging waste are collected. This amount decreases slightly to around 35 to 40 tons in lower and higher monthly periods.",
+      "rouge_scores": {
+        "rouge1": 0.4057971014492754,
+        "rouge2": 0.2388059701492537,
+        "rougeL": 0.31884057971014496,
+        "average": 0.32114788376955805
+      }
+    },
+    {
+      "question": "How many tons of organic waste are collected monthly?",
+      "expected_answer": "Each month, between 230 and 240 tons of organic waste are collected. This amount varies depending on the season and consumption habits of the population.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nHow many tons of organic waste are collected monthly?\nassistant\nEach month, between 30 and 40 tons of organic waste are collected. This amount decreases slightly depending on weather conditions.",
+      "rouge_scores": {
+        "rouge1": 0.48387096774193555,
+        "rouge2": 0.33333333333333337,
+        "rougeL": 0.4516129032258065,
+        "average": 0.4229390681003585
+      }
+    },
+    {
+      "question": "On which days of the week do the workers operate?",
+      "expected_answer": "Workers operate every day of the week. However, on Sunday mornings, only 4 workers are on duty for essential services.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nOn which days of the week do the workers operate?\nassistant\nWorkers operate every day of the week. However, on Sunday and Monday when operations are not required, they may not work together.",
+      "rouge_scores": {
+        "rouge1": 0.43333333333333335,
+        "rouge2": 0.3103448275862069,
+        "rougeL": 0.3666666666666667,
+        "average": 0.3701149425287356
+      }
+    },
+    {
+      "question": "What are the most common issues with the collection trucks?",
+      "expected_answer": "The most common issues include broken lights, corrosion on the truck body, and failures in hydraulic systems, which can cause service delays.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nWhat are the most common issues with the collection trucks?\nassistant\nThe most common issues include broken lights, corrosion on the truck bodies, and failures in hydraulic systems. Additionally, shortages of essential equipment such as radar sensors and communication units can also affect service quality.",
+      "rouge_scores": {
+        "rouge1": 0.5135135135135135,
+        "rouge2": 0.4444444444444444,
+        "rougeL": 0.5135135135135135,
+        "average": 0.4904904904904905
+      }
+    },
+    {
+      "question": "How many trips are made to the landfill each week?",
+      "expected_answer": "Between 15 and 20 trips to the landfill are made weekly, depending on the volume of waste collected and the capacity of the trucks each day.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nHow many trips are made to the landfill each week?\nassistant\nBetween 40 and 50 trips to the landfill are made weekly. These trips include inspections, clean-ups, and other operations to maintain the infrastructure.",
+      "rouge_scores": {
+        "rouge1": 0.3823529411764706,
+        "rouge2": 0.1818181818181818,
+        "rougeL": 0.3235294117647059,
+        "average": 0.29590017825311943
+      }
+    },
+    {
+      "question": "Which areas in Olot generate the most waste?",
+      "expected_answer": "The areas with the highest waste generation are the city center and the Sant Miquel neighborhood, especially on market days and during events.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nWhich areas in Olot generate the most waste?\nassistant\nThe areas with the highest waste generation are city centers and streets, accounting for around 40% of waste waste generation.",
+      "rouge_scores": {
+        "rouge1": 0.4067796610169491,
+        "rouge2": 0.31578947368421045,
+        "rougeL": 0.3728813559322034,
+        "average": 0.3651501635444543
+      }
+    },
+    {
+      "question": "What types of waste containers exist in Olot, and how are they distributed?",
+      "expected_answer": "Olot has waste, packaging, and organic matter containers at each collection point. Additionally, strategic points include cardboard and glass containers to facilitate recycling.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nWhat types of waste containers exist in Olot, and how are they distributed?\nassistant\nOlot has waste generation containers at each household in the city to facilitate waste collection. However, there are no large waste containers distributed throughout the city.",
+      "rouge_scores": {
+        "rouge1": 0.3142857142857143,
+        "rouge2": 0.14705882352941177,
+        "rougeL": 0.22857142857142854,
+        "average": 0.2299719887955182
+      }
+    },
+    {
+      "question": "How is the collection of bulky waste and old furniture managed in Olot?",
+      "expected_answer": "The collection of bulky waste and old furniture is not managed directly by the City Council but by a public company in the region. Citizens must request the service or take their items to the municipal recycling center.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nHow is the collection of bulky waste and old furniture managed in Olot?\nassistant\nThe collection of bulky waste and old furniture is managed directly to the street by the residents of Olot. No outside companies or networks take the waste or furniture.",
+      "rouge_scores": {
+        "rouge1": 0.5,
+        "rouge2": 0.2558139534883721,
+        "rougeL": 0.38636363636363635,
+        "average": 0.38072586328400276
+      }
+    },
+    {
+      "question": "What is the recycling rate in Olot?",
+      "expected_answer": "The recycling rate in Olot is around 60%. However, there are significant differences between neighborhoods depending on residents' recycling habits.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nWhat is the recycling rate in Olot?\nassistant\nThe recycling rate in Olot is around 60%. However, there is a variation as part of the collection can vary greatly depending on the neighborhood and population.",
+      "rouge_scores": {
+        "rouge1": 0.48387096774193544,
+        "rouge2": 0.3333333333333333,
+        "rougeL": 0.3870967741935483,
+        "average": 0.40143369175627236
+      }
+    },
+    {
+      "question": "Are there penalties for not recycling correctly in Olot?",
+      "expected_answer": "Yes, the City Council imposes penalties for non-compliance with waste management regulations. Fines can reach up to \u20ac600 in cases such as abandoning large items in public spaces.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nAre there penalties for not recycling correctly in Olot?\nassistant\nYes, there are penalties for non-compliance with recycling standards in Olot. Fines can reach up to \u20ac1000 if businesses are found to be failing to recycle correctly or efficiently.",
+      "rouge_scores": {
+        "rouge1": 0.3421052631578947,
+        "rouge2": 0.2162162162162162,
+        "rougeL": 0.2894736842105263,
+        "average": 0.28259838786154573
+      }
+    },
+    {
+      "question": "How is street cleaning carried out in Olot, and how frequently?",
+      "expected_answer": "Street cleaning is carried out daily using mechanical sweepers. However, on Sundays, this service is not performed regularly.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nHow is street cleaning carried out in Olot, and how frequently?\nassistant\nStreet cleaning is carried out regularly using automatic sweepers. However, on some days, such operations were insufficient.",
+      "rouge_scores": {
+        "rouge1": 0.40740740740740744,
+        "rouge2": 0.23076923076923078,
+        "rougeL": 0.3333333333333333,
+        "average": 0.3238366571699905
+      }
+    },
+    {
+      "question": "Which company is responsible for maintaining and repairing the collection trucks?",
+      "expected_answer": "The basic maintenance of the trucks is performed internally by a mechanic and an assistant. However, major repairs are outsourced to specialized workshops due to a lack of in-house equipment.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nWhich company is responsible for maintaining and repairing the collection trucks?\nassistant\nThe company is called MTC Logistics. Its primary responsibility is to maintain and repair the trucks, improving their efficiency and lifespan significantly.",
+      "rouge_scores": {
+        "rouge1": 0.2777777777777778,
+        "rouge2": 0.028571428571428574,
+        "rougeL": 0.1388888888888889,
+        "average": 0.1484126984126984
+      }
+    },
+    {
+      "question": "How does tourism affect waste generation in Olot?",
+      "expected_answer": "Tourism has a moderate impact on waste generation. However, during weekends and peak tourist periods, there is a noticeable increase in packaging and organic waste in tourist areas and restaurants.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nHow does tourism affect waste generation in Olot?\nassistant\nTourism has a minor impact on waste generation. However, during weekends when there is a large tourist crowd, there have been reports of garbage\u5806\u653e\u96c6\u4e2d\u5728\u8857\u9053\u548c\u9053\u8def\u5185\u3002",
+      "rouge_scores": {
+        "rouge1": 0.4571428571428572,
+        "rouge2": 0.29411764705882354,
+        "rougeL": 0.4,
+        "average": 0.3837535014005602
+      }
+    },
+    {
+      "question": "What campaigns have been implemented in Olot to improve selective waste collection?",
+      "expected_answer": "Several awareness campaigns have been carried out, including informational campaigns, inspections, and penalties to improve waste separation. However, their overall impact has been limited.",
+      "model_response": "system\nYou are a helpful assistant.\nuser\nWhat campaigns have been implemented in Olot to improve selective waste collection?\nassistant\nSeveral campaigns have been implemented to improve selective waste collection in Olot, such as: organizing community meetings, using social media to spread information, and providing incentives for better waste management. However, their effectiveness has varied depending on the implementation and awareness levels of each campaign.",
+      "rouge_scores": {
+        "rouge1": 0.33707865168539325,
+        "rouge2": 0.09195402298850575,
+        "rougeL": 0.22471910112359555,
+        "average": 0.21791725859916486
+      }
+    }
+  ],
+  "average_scores": {
+    "rouge1": 0.4072043532412131,
+    "rouge2": 0.2410110515280044,
+    "rougeL": 0.3358102389460282,
+    "average": 0.3280085479050818
+  }
+}

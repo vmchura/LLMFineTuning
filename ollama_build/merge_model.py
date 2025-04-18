@@ -8,7 +8,7 @@ base_model = AutoModelForCausalLM.from_pretrained(base_model_name)
 tokenizer = AutoTokenizer.from_pretrained(base_model_name)
 
 # Path to your adapter model (choose the most recent or best performing one)
-adapter_path = "models/finetuned_20250418_035128/final_model"
+adapter_path = "models/finetuned_20250418_095044/final_model"
 
 # Load the adapter model
 model = PeftModel.from_pretrained(base_model, adapter_path)
