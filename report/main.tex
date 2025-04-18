@@ -23,56 +23,56 @@
 
     \subsection{Selected LLM}
     \href{https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct}{Qwen2.5-0.5B-Instruct}\\
-    The main reason to pick that model as a base it is because it is popular and very tiny.
+    This model was selected as the foundation primarily due to its popularity and compact size.
 
     \subsection{Pre-processing steps}
-    According to the documentation of the base model, it is necessary to concatenate que questions and answers, also to add some keywords:\\
+    According to the documentation of the base model, it is necessary to concatenate questions and answers, as well as to add specific keywords:\\
     \lstinline!return f"<|im_start|>system\nYou are a helpful assistant.<|im_end|>!\\
     \lstinline!<|im_start|>user\n{row['Question']}<|im_end|>!\\
     \lstinline!<|im_start|>assistant\n{row['Answer']}<|im_end|>\n"!
 
     \subsection{Configuration}
-    The flow has three steps:
+    The workflow consists of three primary steps, and extra ones for building ollama model:
     \begin{enumerate}
-        \item Training: with the file CustomLLM/TrainLLM.py \\
-        Essentially is just the straight implementation from common repositories but adapted to the model chosen.
-        \item Evaluate: with the file CustomLLM/EvaluateLLM.py uses $Rouge~Score$, from the abstract of its paper:
+        \item Training: implemented in the file CustomLLM/TrainLLM.py \\
+        This is essentially a direct implementation adapted from common repositories specifically for our chosen model.
+        \item Evaluation: implemented in the file CustomLLM/EvaluateLLM.py using $Rouge~Score$. From the abstract of its paper:
         \begin{displayquote}
             ROUGE stands for Recall-Oriented Understudy for Gisting Evaluation. It includes measures to auto-matically determine the quality of a summary by comparing it to other (ideal) summaries created by humans
         \end{displayquote}
 
-        \item Report: with the file CustomLLM/ReportLLM.py \\
-        Creates a detailed report for the CustomLLM/finetuned model.
-        \item runner: with the file complete\_flow.py \\
-        Orchestrates the previous files mentioned.
-        \item Custom console scripts to build ollama model, some helpers could be found in ollama\_build/README.md
+        \item Reporting: implemented in the file CustomLLM/ReportLLM.py \\
+        This component creates a detailed report for the CustomLLM/finetuned model.
+        \item Orchestration: implemented in the file complete\_flow.py \\
+        This component coordinates the execution of the previously mentioned files.
+        \item Custom console scripts: These scripts build the ollama model, with helper documentation available in ollama\_build/README.md
     \end{enumerate}
 
-    To allow some fast test, just to verify that all configurations are correctly set it up, the file complete\_flow.py allows the parameter -test.
-    Once it worked in my local environment, I've run the complete experiment using free GPU in Colab.
+    To facilitate rapid testing and verification of configuration settings, the complete\_flow.py file accepts a -test parameter.
+    After confirming functionality in the local environment, the complete experiment was executed using free GPU resources in Google Colab.
 
     \subsection{Hyperparameters}
     \textbf{LoRA Parameters}
     \begin{itemize}
         \item LORA\_R: 8 \\
-        This is the rank of the low-rank matrices used in LoRA adaptation. \\
-        Higher values (like 16 or 32) allow for more expressive adaptations but require more memory and computation. \\
-        Lower values (like 4 or 8) are more efficient but might limit how much the model can learn. \\
-        Impact: Balances the trade-off between adaptation capacity and computational efficiency.
+        This parameter defines the rank of the low-rank matrices used in LoRA adaptation. \\
+        Higher values (such as 16 or 32) allow for more expressive adaptations but require additional memory and computation. \\
+        Lower values (such as 4 or 8) offer greater efficiency but may constrain the model's learning capacity. \\
+        Impact: Establishes an optimal balance between adaptation capacity and computational efficiency.
         \item LORA\_ALPHA: 16 \\
-        This is the scaling factor for the LoRA updates. \\
-        The effective learning rate for LoRA layers is roughly (LORA\_ALPHA/LORA\_R) * LEARNING\_RATE.\\
-        Impact: Controls how aggressive the LoRA updates are relative to the base model. \\
+        This parameter serves as the scaling factor for the LoRA updates. \\
+        The effective learning rate for LoRA layers is approximately (LORA\_ALPHA/LORA\_R) * LEARNING\_RATE.\\
+        Impact: Regulates the aggressiveness of LoRA updates relative to the base model. \\
         \item LORA\_DROPOUT: 0.05 \\
-        Helps prevent overfitting by randomly dropping some neurons during training.
+        This parameter helps prevent overfitting by randomly deactivating neurons during the training process.
     \end{itemize}
     \textbf{Training Parameters}
     \begin{itemize}
-        \item LEARNING\_RATE: 1e-4,
-        \item BATCH\_SIZE: 2,
+        \item LEARNING\_RATE: 1e-4
+        \item BATCH\_SIZE: 2
         \item GRADIENT\_ACCUMULATION\_STEP: 10 \\
-        Number of forward passes to accumulate gradients before performing a weight update.
-        \item MAX\_ITERATIONS: 1000,
+        This represents the number of forward passes to accumulate gradients before performing a weight update.
+        \item MAX\_ITERATIONS: 1000
     \end{itemize}
 
     \newpage
@@ -87,50 +87,53 @@
 
 
     \end{center}
-    In the figure\ref{fig:rouge} we can see that the fine-tuned model outperforms to the base model.
-    Which it is indicative that the all the setup works as expected. \\
-    In the second chart we can see that the second question has the highest metric.
-    The question and answers:
+    Figure~\ref{fig:rouge} demonstrates that the fine-tuned model consistently outperforms the base model,
+    indicating that our configuration framework functions as expected. \\
+    The second chart reveals that the second question achieves the highest metric score.
+    The question and corresponding answers are as follows:
     \begin{itemize}
         \item How many shifts is the working day divided into?
         \item Expected response: The working day is divided into 3 shifts: morning, afternoon, and night. The shifts are structured to meet operational needs, with most of the work done in the morning and at night.
-        \item Response base model: The standard for a ``shift work'' or ``day shift'' can vary significantly depending on the job responsibilities and the organization's policies, but generally speaking, a 40-hour workweek is common in most workplaces. However, some companies may have more flexible schedules that allow employees to take rest periods during their shifts.
-        \item Response of the fine-tuned model: The working day is divided into three shifts: morning, afternoon, and night.
+        \item Response from base model: The standard for a ``shift work'' or ``day shift'' can vary significantly depending on the job responsibilities and the organization's policies, but generally speaking, a 40-hour workweek is common in most workplaces. However, some companies may have more flexible schedules that allow employees to take rest periods during their shifts.
+        \item Response from fine-tuned model: The working day is divided into three shifts: morning, afternoon, and night.
     \end{itemize}
 
-    Clearly we can see a valid response from the fine-tuned model.
-    And this also proves the correct setup of the Evaluation step.
+    The response from the fine-tuned model clearly demonstrates accuracy and relevance,
+    which further validates the proper implementation of our evaluation methodology.
 
     \newpage
     \section{Functional and commented code with prerequisites.}
-    All code used for all the steps, and even for this report are in the GitHub repository: \href{https://github.com/vmchura/LLMFineTuning}{vmchura/LLMFineTuning}
-    Explanation of main modules:
+    All code utilized throughout this project, including the code for generating this report, is available in the GitHub repository: \href{https://github.com/vmchura/LLMFineTuning}{vmchura/LLMFineTuning}
+    
+    The primary modules are explained below:
     \begin{enumerate}
-        \item CustomLLM/TrainLLM.py performs the actual training, reads the question and answers, loads a base model, writes the fine-tuned model.
-        \item CustomLLM/EvaluateLLM.py performs the evaluation using ROUGE score, loads both models, base and trained and compares the outputs with the expected responses.
-        \item CustomLLM/ReportLLM.py performs reporting charts and detailed comparison in html format.
-        \item models/finetuned\_yyyymmdd\_HHMMSS, the output model by TrainLLM.py
-        \item results/yyyymmdd\_HHMMSS, the results using EvaluateLLM.py and ReportLLM.py
-        \item completeflow.py, orchestration of the previous scripts.
-        \item ollama\_build, files to create ollama model, there are some guides in README.md file but maybe more manual steps are required, better follow official documentation to build ollama model.
-        \item KeywordsOfTokenized.ipynb, simple commands to find the keywords of a base model.
-        \item report\_questions.ipynb, when the service of ollama is open and both models, the base and fine-tuned are open I use this script to generate the responses of each model.
-        \item requirements.txt, python packages needed to execute all code.
+        \item CustomLLM/TrainLLM.py: This module executes the actual training process, reads the questions and answers, loads the base model, and outputs the fine-tuned model.
+        \item CustomLLM/EvaluateLLM.py: This module performs evaluation using ROUGE score methodology, loads both the base and trained models, and compares their outputs against the expected responses.
+        \item CustomLLM/ReportLLM.py: This module generates visualizations and detailed comparisons in HTML format.
+        \item models/finetuned\_yyyymmdd\_HHMMSS: This directory contains the output model generated by TrainLLM.py.
+        \item results/yyyymmdd\_HHMMSS: This directory contains the results produced by EvaluateLLM.py and ReportLLM.py.
+        \item completeflow.py: This script orchestrates the execution of the aforementioned components.
+        \item ollama\_build: This directory contains files necessary for creating the ollama model. While basic guides are provided in the README.md file, additional manual steps may be required. It is recommended to consult the official documentation for comprehensive instructions on building ollama models.
+        \item KeywordsOfTokenized.ipynb: This notebook contains simple commands for identifying keywords in a base model.
+        \item report\_questions.ipynb: When the ollama service is running with both the base and fine-tuned models loaded, this script can be used to generate responses from each model.
+        \item requirements.txt: This file lists all Python packages required to execute the codebase.
     \end{enumerate}
     \newpage
     \section{Questions, answers before fine-tuning.}
     \input{responses_questions/model_A}
     \section{Questions, answers after fine-tuning.}
-    \textbf{Note: the text in brackets were actually chinese characters, I've manually changed so the latex report can generate the pdf file, the manual changes can be shown in the history of this repository}
+    \textbf{Note: The text in brackets originally contained Chinese characters. These have been manually modified to enable LaTeX compilation of the PDF file. These manual changes can be verified in the repository's version history.}
 
     \input{responses_questions/model_B}
     \include{chatgptreport}
-    \section{Conclussions (by Victor Chura)}
+    \section{Conclusions (by Victor Chura)}
 
-    With the small model and in a just a few minutes the fine-tuning was capable of a improvement.
-    It is a good start for more challenging problems but always with the severe science quality to guide trhough each experiment.
-    This project and how was designed it was with the intention to make simpler the changes for other datasets and other models.
-    The usage of LLM's are actually disruptive in the current context, because it's versatility.
-    I've used to make this report and a lot of the code implemented in this project.
+    Even with a small model and minimal training time, the fine-tuning process demonstrated measurable improvement.
+    This represents a promising foundation for addressing more complex challenges, guided by rigorous scientific methodology throughout each experimental phase.
+    
+    This project was designed with modularity in mind to facilitate straightforward adaptation to different datasets and models.
+    The versatility of LLMs represents a disruptive force in the current technological landscape.
+    
+    I have utilized LLM technology both in preparing this report and in implementing significant portions of the code for this project.
 
 \end{document}
