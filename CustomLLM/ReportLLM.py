@@ -16,8 +16,8 @@ class ReportLLM:
         self.results_path = results_path
 
     def load_results(self):
-        base_path = os.path.join(self.results_path, "results","base")
-        ft_path = os.path.join(self.results_path, "results","fine_tuning")
+        base_path = os.path.join(self.results_path,"base_model_results.json")
+        ft_path = os.path.join(self.results_path,"finetuned_model_results.json")
         """Load evaluation results from JSON files"""
         try:
             with open(base_path, 'r') as f:

@@ -56,14 +56,14 @@ def run_train(test_mode=False):
     trainer.run()
 
     # Return the path where the model was saved
-    return f"{output_path}/final_model"
+    return f"{output_path}/final_model", timestamp
 
-def run_evaluate(model_path, test_mode=False):
+def run_evaluate(model_path, timestamp, test_mode=False):
     """Run the evaluation step with appropriate parameters"""
     print_header("STARTING EVALUATION PROCESS")
     
     # Set up paths for evaluation results
-    results_path = "results"
+    results_path = os.path.join("results", timestamp)
     os.makedirs(results_path, exist_ok=True)
     
     # Set default parameters
@@ -108,10 +108,10 @@ def main():
     
     model_path = None
     results_path = None
-    
+    timestamp = None
     # Execute the requested steps
     if "train" in steps:
-        model_path = run_train(test_mode)
+        model_path, timestamp = run_train(test_mode)
         print(f"Training completed. Model saved to: {model_path}")
     else:
         # If not training, use the latest trained model
@@ -128,7 +128,7 @@ def main():
                 steps.remove("evaluate")
                 
     if "evaluate" in steps and model_path:
-        results_path = run_evaluate(model_path, test_mode)
+        results_path = run_evaluate(model_path, timestamp, test_mode)
         print(f"Evaluation completed. Results saved to: {results_path}")
             
     if "report" in steps and results_path:
