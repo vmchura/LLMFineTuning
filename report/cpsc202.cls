@@ -57,3 +57,4 @@
 \RequirePackage{listings}
 \RequirePackage{booktabs}
 \RequirePackage{longtable}
+\RequirePackage{csquotes}
