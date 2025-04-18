@@ -22,10 +22,10 @@ class TrainLLM(object):
             'LORA_DROPOUT': 0.05,
             'LEARNING_RATE': 1e-4,
             'BATCH_SIZE': 2,
+            'GRADIENT_ACCUMULATION_STEP': 10,
             'MAX_ITERATIONS': 1000,
             'USE_SUBSET': False, # Test
             'SUBSET_SIZE': None, # Test
-            'GRADIENT_ACCUMULATION_STEP': 10,
             'SAVE_STEPS': 100
         } | parameters
 
